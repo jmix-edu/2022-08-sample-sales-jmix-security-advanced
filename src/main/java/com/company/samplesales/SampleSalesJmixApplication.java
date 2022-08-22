@@ -1,6 +1,7 @@
 package com.company.samplesales;
 
 import com.google.common.base.Strings;
+import io.jmix.core.security.AuthorizedUrlsProvider;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.Collection;
 
 @SpringBootApplication
 public class SampleSalesJmixApplication {
@@ -45,5 +48,20 @@ public class SampleSalesJmixApplication {
                 + "http://localhost:"
                 + environment.getProperty("local.server.port")
                 + Strings.nullToEmpty(environment.getProperty("server.servlet.context-path")));
+    }
+
+    @Bean
+    public AuthorizedUrlsProvider myAuthorizedUrlsProvider() {
+        return new AuthorizedUrlsProvider() {
+            @Override
+            public Collection<String> getAuthenticatedUrlPatterns() {
+                return Arrays.asList("/authenticated/**");
+            }
+
+            @Override
+            public Collection<String> getAnonymousUrlPatterns() {
+                return Arrays.asList("/public/**");
+            }
+        };
     }
 }
