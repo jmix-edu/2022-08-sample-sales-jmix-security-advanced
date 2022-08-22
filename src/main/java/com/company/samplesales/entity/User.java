@@ -7,6 +7,7 @@ import io.jmix.core.entity.annotation.SystemLevel;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.oidc.user.JmixOidcUserEntity;
 import io.jmix.security.authentication.JmixUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Table(name = "SALES_USER", indexes = {
         @Index(name = "IDX_SALES_USER_ON_USERNAME", columnList = "USERNAME", unique = true)
 })
-public class User implements JmixUserDetails, HasTimeZone {
+public class User extends JmixOidcUserEntity implements JmixUserDetails, HasTimeZone {
 
     @Id
     @Column(name = "ID")
