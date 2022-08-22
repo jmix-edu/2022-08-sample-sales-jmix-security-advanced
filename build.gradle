@@ -47,6 +47,7 @@ dependencies {
 
     implementation 'io.jmix.rest:jmix-rest-starter'
     implementation 'io.jmix.security:jmix-security-oauth2-starter'
+    implementation 'io.jmix.ldap:jmix-ldap-starter'
 }
 
 test {

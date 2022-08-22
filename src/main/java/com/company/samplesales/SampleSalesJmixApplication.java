@@ -1,6 +1,8 @@
 package com.company.samplesales;
 
 import com.google.common.base.Strings;
+import io.jmix.core.security.CompositeUserRepository;
+import io.jmix.core.security.UserRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -45,5 +47,11 @@ public class SampleSalesJmixApplication {
                 + "http://localhost:"
                 + environment.getProperty("local.server.port")
                 + Strings.nullToEmpty(environment.getProperty("server.servlet.context-path")));
+    }
+
+    @Bean
+    @Primary
+    UserRepository userRepository() {
+        return new CompositeUserRepository();
     }
 }
